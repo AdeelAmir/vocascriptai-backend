@@ -1,0 +1,47 @@
+[project]
+name = "briefroom-backend"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.16.4",
+    "fastapi[standard]>=0.136.3",
+    "assemblyai>=0.64.16",
+    "asyncpg>=0.31.0",
+    "bcrypt==4.0.1",
+    "boto3>=1.43.29",
+    "dotenv>=0.9.9",
+    "langchain>=1.3.9",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.4.7",
+    "langchain-groq>=1.1.3",
+    "langgraph>=1.2.5",
+    "uvicorn>=0.34.0",
+    "pydantic-settings>=2.14.1",
+    "pydantic[email]>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "python-jose>=3.5.0",
+    "sqlalchemy[asyncio]>=2.0.50",
+    "python-multipart>=0.0.32",
+    "psycopg2-binary>=2.9.12",
+    "resend>=2.32.2",
+    "google-api-python-client>=2.197.0",
+    "groq>=0.37.1",
+    "yt-dlp>=2026.6.9",
+    "youtube-transcript-api>=1.2.4",
+    "supadata>=1.6.0",
+    "langchain-openai>=1.3.3",
+    "google-generativeai>=0.8.6",
+    "google-genai>=2.10.0",
+    "deepl>=1.30.0",
+    "langchain-google-genai>=4.2.7",
+    "httpx>=0.28.1",
+    "json-repair>=0.61.2",
+    "tzdata>=2026.2",
+    "git-filter-repo>=2.47.0",
+    "weasyprint>=69.0",
+    "cryptography>=49.0.0",
+    "passlib>=1.7.4",
+]
+
+[tool.fastapi]
+entrypoint = "app.main:app"

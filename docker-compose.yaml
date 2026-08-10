@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-briefroom_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-briefroom_password}
+      POSTGRES_DB: ${POSTGRES_DB:-briefroom_database}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5700}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-briefroom_user}:${POSTGRES_PASSWORD:-briefroom_password}@postgres:5432/${POSTGRES_DB:-briefroom_database}
+      APP_ENV: development
+      PORT: 7860
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${BACKEND_PORT:-7860}:7860"
+    volumes:
+      - uploads_data:/app/uploads
+
+volumes:
+  postgres_data:
+  uploads_data:
